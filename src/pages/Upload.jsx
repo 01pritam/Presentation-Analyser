@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useAnalysis } from '../context/AnalysisContext';
 import { Upload, FileText, Video, X } from 'lucide-react';
-
+import AudioResults from './AudioResults'
+import FactCheckResults from './FactCheckResults'
+import PostureResults from './PostureResults'
 export default function UploadPage() {
   const {
     setVideoFile, setPptFile,
@@ -104,7 +106,7 @@ export default function UploadPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div className="max-w mx-auto p-6 bg-white rounded-lg shadow-lg">
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold text-gray-800 mb-2">Presentation Analysis</h1>
         <p className="text-gray-600">Upload your video and optional presentation slides to get detailed feedback</p>
@@ -230,23 +232,11 @@ export default function UploadPage() {
           <br />Your video will be analyzed for presentation quality, body language, and content accuracy.
         </p>
         
-        <button 
-          onClick={handleSubmit}
-          disabled={!videoFileName || isUploading}
-          className={`flex items-center justify-center px-6 py-3 rounded-md font-medium text-white w-48 transition-all duration-200 ${
-            !videoFileName || isUploading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg'
-          }`}
-        >
-          {isUploading ? (
-            <div className="flex items-center">
-              <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-              Uploading...
-            </div>
-          ) : (
-            <>Analyze Presentation</>
-          )}
-        </button>
+        
       </div>
+      <AudioResults />
+       <FactCheckResults />
+        <PostureResults />
     </div>
   );
 }

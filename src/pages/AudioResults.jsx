@@ -31,7 +31,7 @@ export default function AudioResults() {
       formData.append('file', audioBlob);
 
       try {
-        const res = await fetch("https://2a38-34-106-20-83.ngrok-free.app/api/predict", {
+        const res = await fetch("https://87ce-34-16-218-242.ngrok-free.app/api/predict", {
           method: "POST",
           body: formData,
         });
@@ -49,6 +49,7 @@ export default function AudioResults() {
         } catch (parseError) {
           throw new Error(`Failed to parse response: ${parseError.message}`);
         }
+        localStorage.setItem('audioAnalysisData', JSON.stringify(data));
       } catch (err) {
         console.error("Audio analysis request failed:", err);
         setError(err.message || "Failed to analyze audio");
@@ -184,24 +185,7 @@ export default function AudioResults() {
           </div>
           
           {/* Pitch Mean */}
-          <div className="bg-purple-50 rounded-lg p-4">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center">
-                <Music className="text-purple-600 mr-2" size={20} />
-                <h4 className="font-semibold text-gray-700">Pitch Mean</h4>
-              </div>
-              <span className="text-lg font-bold text-purple-700">{pitch_mean.toFixed(0)} Hz</span>
-            </div>
-            <div className="mt-2">
-              <div className="w-full bg-purple-200 rounded-full h-2.5">
-                <div 
-                  className="bg-purple-600 h-2.5 rounded-full" 
-                  style={{ width: `${Math.min(pitch_mean / 2000 * 100, 100)}%` }}
-                ></div>
-              </div>
-              <p className="text-sm text-gray-600 mt-2">{getPitchInterpretation(pitch_mean)}</p>
-            </div>
-          </div>
+         
           
           {/* Volume Variation */}
           <div className="bg-green-50 rounded-lg p-4">
@@ -237,7 +221,7 @@ export default function AudioResults() {
                 <h4 className="font-semibold text-gray-700">Speech Rate</h4>
               </div>
               <span className="text-lg font-bold text-amber-700">
-                {speech_rate ? `${speech_rate.toFixed(1)} WPM` : "N/A"}
+                {speech_rate ? `${speech_rate.toFixed(1)} WPS` : "N/A"}
               </span>
             </div>
             <div className="mt-2">
@@ -375,12 +359,7 @@ export default function AudioResults() {
           <p className="text-gray-600 mb-6">
             Please upload a video or audio file to analyze your speaking confidence and voice metrics.
           </p>
-          <a 
-            href="/upload" 
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
-          >
-            Go to Upload Page
-          </a>
+          
         </div>
       </div>
     );
@@ -397,7 +376,7 @@ export default function AudioResults() {
       {audioAnalysis ? (
         <div className="space-y-6">
           {/* Summary Card */}
-          <div className="bg-white rounded-lg shadow p-6">
+          {/* <div className="bg-white rounded-lg shadow p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-800">Analysis Summary</h3>
               <span className="text-sm text-gray-500">
@@ -429,7 +408,7 @@ export default function AudioResults() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           
           {/* Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -450,7 +429,7 @@ export default function AudioResults() {
           </div>
           
           {/* Recommendations Section */}
-          <div className="bg-white rounded-lg shadow p-6">
+          {/* <div className="bg-white rounded-lg shadow p-6">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
               <TrendingUp className="mr-2 text-blue-600" size={20} />
               Recommendations for Improvement
@@ -501,7 +480,7 @@ export default function AudioResults() {
                 </p>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         <p className="text-gray-600">Analyzing your audio or waiting for upload...</p>

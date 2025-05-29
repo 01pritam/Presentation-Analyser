@@ -47,7 +47,7 @@ export default function Navbar() {
 
   const mainMenuItems = [
     { name: 'Home', icon: <HomeIcon />, path: '/' },
-    { name: 'Features', icon: <FeaturesIcon />, path: '/features' },
+    { name: 'Analyse', icon: <FeaturesIcon />, path: '/upload' },
     { name: 'Pricing', icon: <PricingIcon />, path: '/pricing' },
     { name: 'Documentation', icon: <DocumentationIcon />, path: '/docs' }
   ];
